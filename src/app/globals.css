@@ -1,26 +1,122 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@keyframes slideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(100px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@keyframes stackCard {
+  0% {
+    opacity: 0;
+    transform: translateY(100px) scale(0.9);
+  }
+  100% {
+    opacity: 0.6;
+    transform: translateY(var(--stack-offset)) scale(0.9);
+  }
+}
+
+@keyframes lastCard {
+  0% {
+    opacity: 0;
+    transform: translateY(100px) scale(1);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@layer utilities {
+  .animate-slideUp {
+    animation: slideUp 0.8s ease-out forwards;
+  }
+  
+  .animate-stackCard {
+    animation: stackCard 0.8s ease-out forwards;
+  }
+  
+  .animate-lastCard {
+    animation: lastCard 0.8s ease-out forwards;
+  }
+}
+
+:root {
+  --primary: #C20403;
+  --secondary: #EC6D2B;
+  --dark: #1D1D1D;
+  --darker: #171515;
+  --light-gray: #898989;
+  --white: #FFFFFF;
+  --light: #F0F0F0;
+}
+
+@layer base {
+  body {
+    @apply bg-white text-[#1D1D1D];
+  }
+  
+  /* Font variations to match LT Superior from Figma design */
+  .font-medium {
+    font-weight: 500;
+    letter-spacing: -0.01em;
+  }
+}
+
+@layer components {
+  .container {
+    @apply mx-auto px-4 md:px-6 max-w-[1320px];
+  }
+  
+  .gradient-text {
+    @apply bg-gradient-to-r from-[#C20403] to-[#EC6D2B] inline-block text-transparent bg-clip-text;
+  }
+  
+  .btn-primary {
+    @apply px-6 py-4 rounded-[26px] border border-white text-white flex items-center gap-1.5 hover:opacity-90 transition-opacity;
+  }
+  
+  .btn-gradient {
+    @apply px-6 py-4 rounded-[26px] bg-gradient-to-r from-[#C20403] to-[#EC6D2B] text-white flex items-center gap-1.5 hover:opacity-90 transition-opacity;
+  }
+  
+  .input-field {
+    @apply w-full px-4 py-3 border border-[#3A3A3A] bg-[#1D1D1D] text-[#898989] rounded-md focus:outline-none focus:border-white;
+  }
+  
+  /* Custom classes for Hero section */
+  .bg-gradient-radial {
+    @apply bg-[radial-gradient(ellipse_at_center,var(--tw-gradient-stops))];
+  }
+  
+  /* Custom gradient backgrounds for navbar */
+  .nav-gradient {
+    background: radial-gradient(circle at center, rgba(68, 61, 61, 0.7), rgba(45, 45, 45, 0.7));
+  }
+}
+
+/* Animation for dropdown */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.dropdown-animation {
+  animation: fadeIn 0.3s ease-out forwards;
 }

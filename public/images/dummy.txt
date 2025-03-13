@@ -1,5 +1,0 @@
-This directory contains images for the website:
-- hero-bg.jpg: Dark blurred background image for the hero section
-- profile.jpg: Profile image for the chat button
-
-Please add actual images to improve the website appearance. 

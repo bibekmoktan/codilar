@@ -1,6 +1,11 @@
 'use client';
 import React, { useRef, useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
+
+// Import images
+import rocketImage from '../../public/images/rocket.png';
+import gridImage from '../../public/images/grid.png';
 
 // Arrow outward icon for "View More" buttons
 const ArrowOutwardIcon = () => (
@@ -17,62 +22,6 @@ const CheckIcon = () => (
   </svg>
 );
 
-// CSS Animations for the component
-const AnimationStyles = () => (
-  <style jsx global>{`
-    @keyframes float-slow {
-      0%, 100% { transform: translateY(0) rotate(45deg); }
-      50% { transform: translateY(-10px) rotate(45deg); }
-    }
-    
-    @keyframes float-slow-reverse {
-      0%, 100% { transform: translateY(0) rotate(45deg); }
-      50% { transform: translateY(10px) rotate(45deg); }
-    }
-    
-    @keyframes float-medium {
-      0%, 100% { transform: translateY(0) rotate(45deg); }
-      50% { transform: translateY(-15px) rotate(45deg); }
-    }
-    
-    @keyframes float-medium-reverse {
-      0%, 100% { transform: translateY(0) rotate(45deg); }
-      50% { transform: translateY(15px) rotate(45deg); }
-    }
-    
-    @keyframes gradient-shift {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-    
-    .animate-float-slow {
-      animation: float-slow 8s ease-in-out infinite;
-    }
-    
-    .animate-float-slow-reverse {
-      animation: float-slow-reverse 7s ease-in-out infinite;
-    }
-    
-    .animate-float-medium {
-      animation: float-medium 6s ease-in-out infinite;
-    }
-    
-    .animate-float-medium-reverse {
-      animation: float-medium-reverse 5s ease-in-out infinite;
-    }
-    
-    .animate-gradient {
-      background-size: 200% 200%;
-      animation: gradient-shift 3s ease infinite;
-    }
-    
-    /* Hide scrollbar for Chrome, Safari and Opera */
-    .scrollbar-hide::-webkit-scrollbar {
-      display: none;
-    }
-  `}</style>
-);
 
 // Icon components for feature items
 const ServerIcon = () => (
@@ -100,120 +49,35 @@ const IntegrationIcon = () => (
 );
 
 // Custom 3D SVGs for cards
+
+// Replace SVG components with Image components
 const RocketSVG = () => (
-  <svg width="220" height="220" viewBox="0 0 160 160" className="absolute top-[-40px] right-[-20px] opacity-85 z-0" xmlns="http://www.w3.org/2000/svg">
-    <path d="M90 30C120 40 130 70 125 100C100 95 80 80 70 50C75 45 82.5 35 90 30Z" fill="url(#rocket-gradient)" />
-    <path d="M70 50C80 80 100 95 125 100C120 110 110 120 90 130C75 105 60 80 50 60C55 55 65 52.5 70 50Z" fill="url(#rocket-gradient-2)" fillOpacity="0.7" />
-    <ellipse cx="70" cy="130" rx="20" ry="5" fill="#666" fillOpacity="0.5" />
-    <defs>
-      <linearGradient id="rocket-gradient" x1="90" y1="30" x2="125" y2="100" gradientUnits="userSpaceOnUse">
-        <stop stopColor="#9333EA" />
-        <stop offset="1" stopColor="#EC4899" />
-      </linearGradient>
-      <linearGradient id="rocket-gradient-2" x1="70" y1="50" x2="90" y2="130" gradientUnits="userSpaceOnUse">
-        <stop stopColor="#9333EA" />
-        <stop offset="1" stopColor="#EC4899" />
-      </linearGradient>
-    </defs>
-  </svg>
+  <div className="absolute top-[-40px] right-[-20px] opacity-85 z-0 w-[220px] h-[220px]">
+    <Image
+      src={rocketImage}
+      alt="Rocket illustration"
+      layout="fill"
+      objectFit="contain"
+      quality={90}
+      priority
+    />
+  </div>
 );
 
 const GridSVG = () => (
-  <svg width="220" height="220" viewBox="0 0 160 160" className="absolute top-[-40px] right-[-20px] opacity-85 z-0" xmlns="http://www.w3.org/2000/svg">
-    <g fill="url(#grid-gradient)" fillOpacity="0.8">
-      <rect x="40" y="40" width="20" height="20" rx="2" />
-      <rect x="70" y="40" width="20" height="20" rx="2" />
-      <rect x="100" y="40" width="20" height="20" rx="2" />
-      <rect x="40" y="70" width="20" height="20" rx="2" />
-      <rect x="70" y="70" width="20" height="20" rx="2" />
-      <rect x="100" y="70" width="20" height="20" rx="2" />
-      <rect x="40" y="100" width="20" height="20" rx="2" />
-      <rect x="70" y="100" width="20" height="20" rx="2" />
-      <rect x="100" y="100" width="20" height="20" rx="2" />
-    </g>
-    <defs>
-      <linearGradient id="grid-gradient" x1="40" y1="40" x2="120" y2="120" gradientUnits="userSpaceOnUse">
-        <stop stopColor="#38BDF8" />
-        <stop offset="1" stopColor="#6366F1" />
-      </linearGradient>
-    </defs>
-  </svg>
+  <div className="absolute top-[-40px] right-[-20px] opacity-85 z-0 w-[220px] h-[220px]">
+    <Image
+      src={gridImage}
+      alt="Grid illustration"
+      layout="fill"
+      objectFit="contain"
+      quality={90}
+      priority
+    />
+  </div>
 );
 
-const JewelrySVG = () => (
-  <svg width="220" height="220" viewBox="0 0 160 160" className="absolute top-[-40px] right-[-20px] opacity-85 z-0" xmlns="http://www.w3.org/2000/svg">
-    <path d="M80 40L40 80L80 120L120 80L80 40Z" fill="url(#diamond-gradient)" />
-    <path d="M80 40L40 80H120L80 40Z" fill="url(#diamond-gradient-2)" fillOpacity="0.8" />
-    <path d="M40 80L80 120L120 80H40Z" fill="url(#diamond-gradient-3)" fillOpacity="0.6" />
-    <defs>
-      <linearGradient id="diamond-gradient" x1="40" y1="40" x2="120" y2="120" gradientUnits="userSpaceOnUse">
-        <stop stopColor="#F59E0B" />
-        <stop offset="1" stopColor="#EF4444" />
-      </linearGradient>
-      <linearGradient id="diamond-gradient-2" x1="40" y1="40" x2="120" y2="80" gradientUnits="userSpaceOnUse">
-        <stop stopColor="#F59E0B" />
-        <stop offset="1" stopColor="#EF4444" />
-      </linearGradient>
-      <linearGradient id="diamond-gradient-3" x1="40" y1="80" x2="120" y2="120" gradientUnits="userSpaceOnUse">
-        <stop stopColor="#F59E0B" />
-        <stop offset="1" stopColor="#EF4444" stopOpacity="0.5" />
-      </linearGradient>
-    </defs>
-  </svg>
-);
 
-// Custom animations for the neon effect
-const NeonAnimations = () => (
-  <style jsx global>{`
-    @keyframes neon-pulse {
-      0%, 100% { 
-        box-shadow: 0 0 15px 2px rgba(var(--glow-color), 0.7); 
-      }
-      50% { 
-        box-shadow: 0 0 20px 5px rgba(var(--glow-color), 0.9); 
-      }
-    }
-    
-    @keyframes neon-pulse-light {
-      0%, 100% { 
-        text-shadow: 0 0 8px rgba(var(--glow-color), 0.7); 
-      }
-      50% { 
-        text-shadow: 0 0 12px rgba(var(--glow-color), 0.9); 
-      }
-    }
-    
-    @keyframes feature-glow {
-      0%, 100% { 
-        text-shadow: 0 0 5px rgba(var(--feature-glow), 0.7);
-        box-shadow: 0 0 10px -2px rgba(var(--feature-glow), 0.3);
-      }
-      50% { 
-        text-shadow: 0 0 10px rgba(var(--feature-glow), 1);
-        box-shadow: 0 0 15px -1px rgba(var(--feature-glow), 0.5);
-      }
-    }
-    
-    .neon-glow {
-      animation: neon-pulse 3s infinite;
-    }
-    
-    .neon-text {
-      animation: neon-pulse-light 3s infinite;
-    }
-    
-    .feature-glow {
-      animation: feature-glow 4s infinite;
-      border-radius: 0.375rem;
-    }
-    
-    .glass-effect {
-      backdrop-filter: blur(5px);
-      background: rgba(25, 25, 35, 0.3);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-    }
-  `}</style>
-);
 
 // Accelerator card component
 const AcceleratorCard = ({ 
@@ -224,112 +88,94 @@ const AcceleratorCard = ({
   svgType,
   index
 }) => {
-  // Determine color scheme based on card type
-  const getColorScheme = () => {
-    switch(svgType) {
-      case 'rocket':
-        return {
-          border: 'border-purple-500/30',
-          borderGlow: '--glow-color: 147, 51, 234',
-          titleBg: 'bg-black/80',
-          titleText: 'text-white',
-          titleBorder: 'border-transparent',
-          titleGradient: 'bg-gradient-to-r from-purple-500 via-pink-500 to-purple-500',
-          iconColor: 'text-white opacity-70',
-          gradientFrom: 'from-purple-900/20',
-          gradientTo: 'to-purple-800/10',
-          featureGlow: '--feature-glow: 168, 85, 247',
-          featureColor: 'text-3xl bg-gradient-to-r from-white via-purple-400 to-purple-400 bg-clip-text text-transparent'
-        };
-      case 'grid':
-        return {
-          border: 'border-blue-500/30',
-          borderGlow: '--glow-color: 56, 189, 248',
-          titleBg: 'bg-black/80',
-          titleText: 'text-white',
-          titleBorder: 'border-transparent',
-          titleGradient: 'bg-gradient-to-r from-blue-500 via-indigo-500 to-blue-500',
-          iconColor: 'text-white opacity-70',
-          gradientFrom: 'from-blue-900/20',
-          gradientTo: 'to-blue-800/10',
-          featureGlow: '--feature-glow: 59, 130, 246',
-          featureColor: 'text-3xl bg-gradient-to-r from-white via-blue-400 to-blue-400 bg-clip-text text-transparent'
-        };
-      case 'jewelry':
-        return {
-          border: 'border-amber-500/30',
-          borderGlow: '--glow-color: 245, 158, 11',
-          titleBg: 'bg-black/80',
-          titleText: 'text-white',
-          titleBorder: 'border-transparent',
-          titleGradient: 'bg-gradient-to-r from-amber-500 via-orange-500 to-amber-500',
-          iconColor: 'text-white opacity-70',
-          gradientFrom: 'from-amber-900/20',
-          gradientTo: 'to-amber-800/10',
-          featureGlow: '--feature-glow: 249, 115, 22',
-          featureColor: 'text-3xl bg-gradient-to-r from-white via-amber-400 to-amber-400 bg-clip-text text-transparent'
-        };
-      default:
-        return {
-          border: 'border-gray-700',
-          borderGlow: '--glow-color: 100, 100, 200',
-          titleBg: 'bg-black/80',
-          titleText: 'text-white',
-          titleBorder: 'border-transparent',
-          titleGradient: 'bg-gradient-to-r from-gray-400 via-gray-600 to-gray-400',
-          iconColor: 'text-white opacity-70',
-          gradientFrom: 'from-gray-900/20',
-          gradientTo: 'to-gray-800/10',
-          featureGlow: '--feature-glow: 156, 163, 175', 
-          featureColor: 'text-3xl bg-gradient-to-r from-white to-purple-700 bg-clip-text text-transparent'
-        };
-    }
-  };
-
-  const colors = getColorScheme();
-
   return (
-    <div 
-      className={`relative rounded-xl overflow-hidden h-full bg-gradient-to-br from-[#050508] to-[#0a0a14] border ${colors.border} transition-all duration-300 flex flex-col neon-glow`}
-      style={{ [colors.borderGlow]: true }}
-    >
-      {/* Card content */}
-      <div className="relative z-10 p-6 pt-12 h-full flex flex-col">
-        {/* SVG Background based on type */}
-        <div className="absolute top-0 right-0 z-0 w-full h-full overflow-visible">
-          {svgType === 'rocket' && <RocketSVG />}
-          {svgType === 'grid' && <GridSVG />}
-          {svgType === 'jewelry' && <JewelrySVG />}
+    <div className="relative w-full h-full bg-gradient-to-br from-[#1a1a1a] to-[#2a2a2a] rounded-2xl p-8 overflow-visible group mt-10">
+      {/* Background gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#1a1a1a]/50 to-[#1a1a1a] z-0 rounded-2xl"></div>
+
+      {/* Rocket Image */}
+      {svgType === 'rocket' && (
+        <div className="absolute -top-[80px] -right-[15px] w-[300px] h-[300px] z-[999] rotate-[20deg] transition-transform duration-300 ease-out group-hover:scale-110">
+          <div className="relative w-full h-full">
+            <Image
+              src={rocketImage}
+              alt="Rocket illustration"
+              layout="fill"
+              objectFit="contain"
+              quality={100}
+              priority
+              className="transform -rotate-[15deg] scale-110 transition-transform duration-300 ease-out group-hover:scale-125"
+            />
+          </div>
         </div>
-        
-        {/* Background Gradient Overlay */}
-        <div className={`absolute inset-0 bg-gradient-to-br ${colors.gradientFrom} ${colors.gradientTo} z-0`}></div>
-        
-        {/* Title */}
-        <div className="relative z-10 w-fit mb-4">
-          <div className={`absolute -inset-[1.5px] ${colors.titleGradient} rounded-full blur-[0.5px]`}></div>
-          <h3 className={`${colors.titleText} relative text-xl font-medium px-5 py-2 rounded-full ${colors.titleBorder} ${colors.titleBg} backdrop-blur-sm z-10`}>
-            {title}
-          </h3>
+      )}
+
+      {/* Grid Image */}
+      {svgType === 'grid' && (
+        <div className="absolute -top-[60px] right-[20px] w-[250px] h-[250px] z-[999] rotate-[20deg]">
+          <div className="relative w-full h-full">
+            <Image
+              src={gridImage}
+              alt="Grid illustration"
+              layout="fill"
+              objectFit="contain"
+              quality={100}
+              priority
+              className="transform -rotate-[15deg] scale-110"
+            />
+          </div>
         </div>
-        
+      )}
+
+      {/* Jewelry Image */}
+      {svgType === 'jewelry' && (
+        <div className="absolute -top-[60px] right-[20px] w-[250px] h-[250px] z-[999] rotate-[20deg] ">
+          <div className="relative w-full h-full">
+            <Image
+              src={gridImage}
+              alt="Jewelry illustration"
+              layout="fill"
+              objectFit="contain"
+              quality={100}
+              priority
+              className="transform -rotate-[15deg] scale-110"
+            />
+          </div>
+        </div>
+      )}
+
+      {/* Content */}
+      <div className="relative z-10 h-full flex flex-col">
+        {/* Title with gradient border */}
+        <div className="flex justify-start mt-40">
+          <div className={`relative ${svgType === 'rocket' ? 'group-hover:scale-105 transition-transform duration-300' : ''}`}>
+            <div className="absolute -inset-[1px] bg-gradient-to-r from-purple-500 to-pink-500 rounded-full blur-[1px]"></div>
+            <h3 className="relative bg-[#1a1a1a] text-white px-6 py-2 rounded-full text-xl font-medium">
+              {title}
+            </h3>
+          </div>
+        </div>
+
         {/* Description */}
-        <p className="text-white/90 text-base mb-8 z-10">{description}</p>
-        
+        <p className={`text-gray-300 mt-6 text-base leading-relaxed max-w-[80%] ${svgType === 'rocket' ? 'group-hover:text-white transition-colors duration-300' : ''}`}>
+          {description}
+        </p>
+
         {/* Features list */}
-        <div className="space-y-4 mt-auto z-10">
-          {features.map((feature, index) => (
+        <div className="mt-10 space-y-4">
+          {features.map((feature, idx) => (
             <div 
-              key={index} 
-              className="flex items-center gap-3 group hover:translate-x-1 transition-transform duration-200 p-2 feature-glow"
-              style={{ [colors.featureGlow]: true }}
+              key={idx}
+              className="flex items-center gap-3 text-sm text-gray-300"
             >
-              <div className={`${colors.iconColor} w-6 h-6 flex-shrink-0 group-hover:scale-110 transition-transform duration-200`}>
-                {index === 0 && <SpeedIcon />}
-                {index === 1 && <ServerIcon />}
-                {index === 2 && <IntegrationIcon />}
+              <div className={`w-6 h-6 flex-shrink-0 ${svgType === 'rocket' ? 'transition-transform duration-300 group-hover:scale-110' : ''}`}>
+                {idx === 0 && <SpeedIcon />}
+                {idx === 1 && <ServerIcon />}
+                {idx === 2 && <IntegrationIcon />}
               </div>
-              <p className={`${colors.featureColor} text-sm group-hover:text-white transition-colors duration-200`}>{feature}</p>
+              <span className={`bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent ${svgType === 'rocket' ? 'transition-all duration-300 group-hover:from-purple-300 group-hover:to-pink-300' : ''}`}>
+                {feature}
+              </span>
             </div>
           ))}
         </div>
@@ -418,12 +264,11 @@ const Accelerators = () => {
   ];
 
   return (
-    <section className="relative bg-white py-20">
+    <section className="relative bg-white py-20 overflow-visible">
       {/* Include animation styles */}
-      <AnimationStyles />
-      <NeonAnimations />
+   
       
-      <div className="w-full relative ml-24">
+      <div className="w-full relative ml-24 overflow-visible">
         {/* Header */}
         <div className="mb-8 px-6">
           <span className="uppercase text-base font-normal text-black">ACCELERATORS</span>
@@ -441,25 +286,25 @@ const Accelerators = () => {
         </div>
 
         {/* Accelerators Grid with horizontal scroll on all screen sizes */}
-        <div className="relative mt-12">
-          {/* Horizontal scrolling container with fixed width to allow 2.5 cards to be visible */}
+        <div className="relative mt-12 overflow-visible">
+          {/* Horizontal scrolling container */}
           <div 
             ref={scrollContainerRef}
             onScroll={handleScroll}
-            className="flex overflow-x-auto gap-8 pb-8 snap-x snap-mandatory scrollbar-hide"
+            className="flex overflow-x-auto gap-8 pb-8 pt-[180px] -mt-[180px] snap-x snap-mandatory scrollbar-hide relative overflow-visible"
             style={{ 
               scrollbarWidth: 'none', 
               msOverflowStyle: 'none',
               paddingRight: '0',
-              width: 'calc(100vw - 6rem)'  // 6rem accounts for the left margin, allowing 2.5 cards to be visible
+              width: 'calc(100vw - 6rem)'
             }}
           >
             {accelerators.map((accelerator, index) => (
               <div 
                 key={accelerator.id} 
-                className="flex-shrink-0 snap-start h-[600px]"
+                className="flex-shrink-0 snap-start h-[600px] relative overflow-visible"
                 style={{ 
-                  width: 'calc((100vw - 11rem) / 2)',  // Each card takes up (viewport - margins - gap) / 2.5 but we'll show 2 full cards
+                  width: 'calc((100vw - 11rem) / 2)',
                   minWidth: '300px',
                   maxWidth: '500px'
                 }}
@@ -482,6 +327,22 @@ const Accelerators = () => {
     </section>
   );
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 export default Accelerators;
 

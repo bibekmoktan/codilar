@@ -124,48 +124,49 @@ const Events = () => {
   };
 
   return (
-    <section className="relative bg-gradient-to-br from-pink-50 to-white overflow-hidden py-16">
-      <div className="container mx-auto px-4 pr-0">
-        {/* Top div with title and navigation arrows */}
-        <div className="flex items-center justify-between mb-10">
-          <h3 className="uppercase text-sm font-medium tracking-wider">COMPANY EVENTS</h3>
+    <section className="relative overflow-hidden py-6 md:py-12">
+      {/* Container with proper padding */}
+      <div className="container mx-auto px-5">
+        {/* Top section with counter */}
+        <div className="flex items-center justify-between mb-3 md:mb-6">
+          <h3 className="uppercase text-xs md:text-sm font-medium tracking-[0.02em]">COMPANY EVENTS</h3>
           
           <div className="flex items-center gap-4">
-            <span className="text-lg">
+            <span className="text-base md:text-lg">
               {activeColorIndex + 1} of {eventsImages.length}
             </span>
           </div>
         </div>
 
-        {/* Main title - Fixed to the first event */}
-        <h2 className="text-4xl md:text-5xl font-medium leading-tight mb-10">
-          {fixedEvent.title}
-        </h2>
-
-        {/* Two-column layout (4:8 ratio) */}
-        <div className="flex flex-col lg:flex-row gap-12">
-          {/* Left column (4/12) - Fixed content */}
-          <div className="lg:w-4/12">
-            {/* Description - Fixed to the first event */}
-            <div className="mb-8">
-              <p className="text-base text-black/70">
+        {/* Mobile: Column layout | Desktop: Side-by-side layout with image on right */}
+        <div className="flex flex-col lg:flex-row lg:items-stretch gap-6 md:gap-10">
+          {/* Content column - Full width on mobile, 5/12 on desktop */}
+          <div className="w-full lg:w-5/12 flex flex-col lg:justify-between">
+            {/* Title section */}
+            <div>
+              <h2 className="text-2xl md:text-4xl lg:text-5xl font-medium leading-tight mb-4 lg:mb-6">
+                {fixedEvent.title}
+              </h2>
+              
+              <p className="text-sm md:text-base text-black/70 leading-relaxed mb-6 lg:mb-8">
                 {fixedEvent.description}
               </p>
+              
+              <button className="inline-flex items-center gap-2 px-5 py-2.5 border border-black rounded-full hover:bg-black hover:text-white transition-colors mb-4 md:mb-5 text-sm md:text-base">
+                <span>Explore All Events</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </button>
             </div>
-
-            {/* Explore All Events Button */}
-            <button className="inline-flex items-center gap-2 px-6 py-3 border border-black rounded-full hover:bg-black hover:text-white transition-colors mb-10">
-              <span>Explore All Events</span>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </button>
-
-            {/* Upcoming Event Card */}
-            <div className="bg-[#FFF3F3] border border-[#FFD7D7] rounded-2xl p-6">
-              <span className="text-[#335081] text-sm font-medium">Upcoming Event</span>
-              <h3 className="text-xl font-medium mt-2 mb-4">{upcomingEvent.title}</h3>
-              <div className="relative h-48 rounded-lg overflow-hidden">
+            
+            {/* Upcoming event card - Fixed at bottom on desktop */}
+            <div className="bg-gradient-to-br from-pink-50 to-white bg-[#FFF3F3] border border-[#FFD7D7] rounded-2xl p-3 md:p-4 lg:p-6 flex items-center gap-3 mb-3 md:mb-5 lg:h-[130px]">
+              <div className="flex-1">
+                <span className="text-[#335081] text-xs md:text-sm font-medium">Upcoming Event</span>
+                <h3 className="text-base md:text-xl font-medium mt-1">{upcomingEvent.title}</h3>
+              </div>
+              <div className="relative w-20 h-16 md:w-24 md:h-20 rounded-lg overflow-hidden flex-shrink-0">
                 <Image
                   src={upcomingEvent.image}
                   alt={upcomingEvent.title}
@@ -176,14 +177,16 @@ const Events = () => {
             </div>
           </div>
 
-          {/* Right column (8/12) - Infinite scrolling content */}
-          <div className="lg:w-8/12">
-            {/* Image slider with infinite scroll */}
+          {/* Image slider column - Full width on mobile, 7/12 on desktop */}
+          <div className="w-full lg:w-7/12 mt-4 lg:mt-0">
+            {/* Image slider - Taller on desktop */}
             <div 
               ref={containerRef}
-              className="relative h-[500px] rounded-2xl rounded-l-none overflow-hidden"
+              className="relative h-[220px] md:h-[300px] lg:h-[500px] rounded-2xl overflow-hidden"
               onMouseEnter={() => setIsPaused(true)}
               onMouseLeave={() => setIsPaused(false)}
+              onTouchStart={() => setIsPaused(true)}
+              onTouchEnd={() => setIsPaused(false)}
             >
               {/* Image container with infinite scroll effect */}
               <div 
@@ -224,8 +227,8 @@ const Events = () => {
               />
             </div>
 
-            {/* Progress Bar and Controls in one row */}
-            <div className="mt-4 flex items-center justify-between">
+            {/* Progress Bar and Controls */}
+            <div className="mt-3 flex items-center justify-between">
               {/* Progress Bar */}
               <div className="flex-grow h-1 bg-gray-200 rounded-full overflow-hidden mr-4">
                 <div 
@@ -237,15 +240,15 @@ const Events = () => {
               {/* Play/Pause Button */}
               <button
                 onClick={() => setIsPaused(!isPaused)}
-                className="w-12 h-12 rounded-full border border-black flex items-center justify-center hover:bg-black hover:text-white transition-colors flex-shrink-0"
+                className="w-8 h-8 md:w-10 md:h-10 rounded-full border border-black flex items-center justify-center hover:bg-black hover:text-white transition-colors flex-shrink-0"
                 aria-label={isPaused ? "Play" : "Pause"}
               >
                 {isPaused ? (
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                  <svg className="w-3 h-3 md:w-4 md:h-4" viewBox="0 0 24 24" fill="none">
                     <path d="M5 4L19 12L5 20V4Z" fill="currentColor" />
                   </svg>
                 ) : (
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                  <svg className="w-3 h-3 md:w-4 md:h-4" viewBox="0 0 24 24" fill="none">
                     <rect x="6" y="5" width="4" height="14" rx="1" fill="currentColor" />
                     <rect x="14" y="5" width="4" height="14" rx="1" fill="currentColor" />
                   </svg>

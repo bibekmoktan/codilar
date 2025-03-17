@@ -3,7 +3,8 @@ import Hero from '@/components/Hero';
 import PartnersSection from '@/components/PartnersSection';
 import ExpertiseSection from '@/components/ExpertiseSection';
 import CaseStudies from '@/components/CaseStudies';
-import Accelerators, { Testimonials } from '@/components/Accelerators';
+import Accelerators from '@/components/Accelerators';
+import { Testimonials } from '@/components/Testimonials';
 import Events from '@/components/Events';
 
 export default function Home() {

@@ -22,36 +22,37 @@ const PartnersSection = () => {
   const doubledPartners = [...partners, ...partners];
 
   return (
-    <section className="bg-[#171515] py-24 overflow-hidden">
+    <section className="bg-[#171515] py-16 md:py-24 overflow-hidden">
       <div className="container mx-auto px-4">
         {/* Section Header */}
-        <div className="text-center mb-16">
-          <h2 className="uppercase text-white text-base font-normal tracking-[0.02em] mb-6">
+        <div className="text-center mb-6 md:mb-16">
+          <h2 className="uppercase text-white text-xs md:text-base font-normal tracking-[0.02em] mb-4 md:mb-6">
             Our Partnerships
           </h2>
-          <h1 className="text-white text-5xl md:text-7xl font-light leading-tight">
-            Industry leading Partnerships
+          <h1 className="text-white text-2xl md:text-5xl lg:text-7xl font-light leading-tight">
+            Industry Leading<br />
+            Partnerships
           </h1>
         </div>
 
-        {/* Partners Slider Container */}
+        {/* Partners Display Container */}
         <div className="relative w-full">
           {/* First Row - Moving Left */}
           <div className="flex animate-scroll-left">
             {doubledPartners.map((partner, index) => (
               <div
                 key={`${partner.id}-${index}`}
-                className="relative min-w-[180px] h-[120px] mx-3 gradient-border p-[1px] rounded-sm group"
+                className="relative min-w-[120px] md:min-w-[180px] h-[80px] md:h-[120px] mx-2 md:mx-3 gradient-border p-[1px] rounded-sm group"
               >
                 {/* Inner content container */}
-                <div className="bg-[#171515] w-full h-full rounded-sm p-4 flex items-center justify-center">
+                <div className="bg-[#171515] w-full h-full rounded-sm p-2 md:p-4 flex items-center justify-center">
                   <div className="relative w-full h-full">
                     <Image
                       src={partner.image}
                       alt={partner.alt}
                       fill
                       className="object-contain filter grayscale hover:grayscale-0 transition-all duration-300"
-                      sizes="180px"
+                      sizes="(max-width: 768px) 120px, 180px"
                     />
                   </div>
                 </div>
@@ -60,21 +61,21 @@ const PartnersSection = () => {
           </div>
 
           {/* Second Row - Moving Right */}
-          <div className="flex animate-scroll-right mt-12">
+          <div className="flex animate-scroll-right mt-6 md:mt-12">
             {doubledPartners.reverse().map((partner, index) => (
               <div
                 key={`${partner.id}-reverse-${index}`}
-                className="relative min-w-[180px] h-[120px] mx-3 gradient-border p-[1px] rounded-sm group"
+                className="relative min-w-[120px] md:min-w-[180px] h-[80px] md:h-[120px] mx-2 md:mx-3 gradient-border p-[1px] rounded-sm group"
               >
                 {/* Inner content container */}
-                <div className="bg-[#171515] w-full h-full rounded-sm p-4 flex items-center justify-center">
+                <div className="bg-[#171515] w-full h-full rounded-sm p-2 md:p-4 flex items-center justify-center">
                   <div className="relative w-full h-full">
                     <Image
                       src={partner.image}
                       alt={partner.alt}
                       fill
                       className="object-contain filter grayscale hover:grayscale-0 transition-all duration-300"
-                      sizes="180px"
+                      sizes="(max-width: 768px) 120px, 180px"
                     />
                   </div>
                 </div>
@@ -84,15 +85,16 @@ const PartnersSection = () => {
         </div>
 
         {/* View All Button */}
-        <div className="flex justify-center mt-12">
-          <button className="flex items-center gap-2 px-9 py-4 border border-white/20 rounded-3xl text-white hover:border-white/40 transition-colors">
-            <span className="text-base font-medium">View All</span>
+        <div className="flex justify-center mt-8 md:mt-12">
+          <button className="flex items-center gap-2 px-5 py-3 md:px-9 md:py-4 border border-white rounded-3xl text-white hover:bg-white hover:text-[#171515] transition-all duration-300 w-[90%] md:w-auto justify-center">
+            <span className="text-sm md:text-base font-medium">View All</span>
             <svg
-              width="18"
-              height="18"
+              width="16"
+              height="16"
               viewBox="0 0 24 24"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
+              className="md:w-[18px] md:h-[18px]"
             >
               <path
                 d="M7 17L17 7M17 7H7M17 7V17"
@@ -107,7 +109,7 @@ const PartnersSection = () => {
       </div>
 
       {/* Background Gradient Effect */}
-      <div className="absolute top-0 right-0 w-[300px] h-[300px] rounded-full bg-red-900/25 blur-[150px]"></div>
+      <div className="absolute top-0 right-0 w-[150px] h-[150px] md:w-[300px] md:h-[300px] rounded-full bg-red-900/25 blur-[80px] md:blur-[150px]"></div>
 
       <style jsx global>{`
         @keyframes scroll-left {
@@ -134,6 +136,17 @@ const PartnersSection = () => {
 
         .animate-scroll-right {
           animation: scroll-right 30s linear infinite;
+        }
+
+        /* Faster animation on mobile */
+        @media (max-width: 768px) {
+          .animate-scroll-left {
+            animation: scroll-left 20s linear infinite;
+          }
+
+          .animate-scroll-right {
+            animation: scroll-right 20s linear infinite;
+          }
         }
 
         /* Pause animation on hover */

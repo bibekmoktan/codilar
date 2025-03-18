@@ -69,7 +69,7 @@ const Testimonials = () => {
   
     return (
       <section className="bg-white py-10 sm:py-20 w-full overflow-x-hidden">
-        <div className="mx-auto px-4 sm:px-6 md:px-8 max-w-[1320px]">
+        <div className="mx-auto px-4 sm:px-6 md:px-8 max-w-fit ">
           {/* Top section with title and heading - centered */}
           <div className="text-center mb-6 sm:mb-20">
             <span className="uppercase text-xs sm:text-base font-medium tracking-wide text-black block mb-1 sm:mb-2">TESTIMONIALS</span>
@@ -104,7 +104,7 @@ const Testimonials = () => {
                 </h3>
                 
                 {/* More Stories section - hidden on mobile, visible on md screens and up */}
-                <div className="hidden md:block">
+                <div className="hidden md:block mt-10">
                   <h4 className="text-base sm:text-lg font-medium text-black mb-4 sm:mb-5 mt-4 sm:mt-6">More Stories</h4>
                   
                   {/* Smaller videos grid - 2 columns */}

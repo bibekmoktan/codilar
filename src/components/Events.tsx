@@ -147,11 +147,7 @@ const Events = () => {
               <h2 className="text-2xl md:text-4xl lg:text-5xl font-medium leading-tight mb-4 lg:mb-6">
                 {fixedEvent.title}
               </h2>
-              
-              <p className="text-sm md:text-base text-black/70 leading-relaxed mb-6 lg:mb-8">
-                {fixedEvent.description}
-              </p>
-              
+
               <button className="inline-flex items-center gap-2 px-5 py-2.5 border border-black rounded-full hover:bg-black hover:text-white transition-colors mb-4 md:mb-5 text-sm md:text-base">
                 <span>Explore All Events</span>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -175,6 +171,9 @@ const Events = () => {
                 />
               </div>
             </div>
+            <p className="text-sm md:text-base text-black/70 leading-relaxed mb-6 lg:mb-8">
+                {fixedEvent.description}
+              </p>
           </div>
 
           {/* Image slider column - Full width on mobile, 7/12 on desktop */}

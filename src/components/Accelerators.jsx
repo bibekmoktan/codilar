@@ -89,7 +89,7 @@ const AcceleratorCard = ({
   index
 }) => {
   return (
-    <div className="relative w-full h-full bg-gradient-to-br from-[#1a1a1a] to-[#2a2a2a] rounded-xl p-4 sm:p-8 overflow-visible group mt-6">
+    <div className="relative w-full h-full bg-gradient-to-br from-[#1a1a1a] to-[#2a2a2a] rounded-xl p-4 sm:p-8 overflow-visible group mt-6 ml-8">
       {/* Background gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#1a1a1a]/50 to-[#1a1a1a] z-0 rounded-2xl"></div>
 

@@ -180,12 +180,17 @@ const ExpertiseSection = () => {
           <div className="w-1/2">
             <div className="w-full h-full">
               <div 
-                className="w-full h-[600px] border-none bg-gray-300 shadow-md rounded-xl relative cursor-pointer overflow-hidden"
+                className="w-full h-[600px] border-none shadow-md rounded-xl relative cursor-pointer overflow-hidden"
                 onClick={handleExpertiseChange}
                 aria-label="Click to change expertise"
               >
                 {/* Add subtle pattern to the gray area */}
                 <div className="absolute inset-0 opacity-5 bg-pattern"></div>
+                
+                {/* Add the GradientCircle component as a background */}
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <GradientCircle className="w-full h-full" width="100%" height="100%" />
+                </div>
               </div>
             </div>
           </div>
@@ -203,7 +208,12 @@ const ExpertiseSection = () => {
               </div>
               
               {/* Gray rectangular area - non-clickable on mobile */}
-              <div className="w-full h-[300px] bg-gray-300 rounded-lg mb-4"></div>
+              <div className="w-full h-[300px] rounded-lg mb-4 relative overflow-hidden">
+                {/* Add the GradientCircle component to mobile view */}
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <GradientCircle className="w-full h-full" width="100%" height="100%" />
+                </div>
+              </div>
               
               <div className="relative overflow-hidden bg-gradient-to-br from-white via-white to-pink-50 rounded-xl">
                 {/* Subtle gradient overlay */}
